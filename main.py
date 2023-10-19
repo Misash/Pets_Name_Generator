@@ -1,37 +1,16 @@
-from langchain.llms import OpenAI
-from langchain.prompts import PromptTemplate
-from langchain.chains import LLMChain
-from dotenv import load_dotenv
+import langchain_helper as lch
+import streamlit as st
+
+st.title("Pets name generator")
 
 
-load_dotenv()
+user_animal_type = st.sidebar.selectbox("What is your pet?",("Cat","Dog","Hamster","Rabbit"))
 
 
-def generate_pet_name(animal_type, pet_color):
-
-    #temperature how creative the model will be 
-    llm = OpenAI(temperature=0.8)
-
-
-    #prompt templates
-    prompt_template_name = PromptTemplate(
-        input_variables=['animal_type', 'pet_color'] ,
-        template="I have a {animal_type} pet and I want a cool name for it, it is {pet_color} in color. Suggest me five cool names for my pet."
-    )
-
-
-    name_chain = LLMChain(llm=llm, prompt=prompt_template_name)
-
-    response = name_chain({'animal_type': animal_type, 'pet_color': pet_color})
-
-    return response 
-
-
-if __name__ == "__main__" :
-    print(generate_pet_name("horse","black"))
+user_pet_color = st.sidebar.text_area(label=f"What color is your {user_animal_type}?",max_chars=10).strip()
 
 
 
-
-
-
+if user_pet_color:
+    response = lch.generate_pet_name(user_animal_type,user_pet_color)
+    st.text(response['pet_names'])
