@@ -3,3 +3,5 @@ openai
 streamlit
 python-dotenv
 streamlit
+wikipedia
+numexpr
