@@ -3,7 +3,7 @@
 app using langChain framework
 
 ## Requirements
-create a .env with the opeenAI key and python >=3.10.12
+create a .env with the openAI key and python >=3.10.12
 
 ```py
   OPENAI_API_KEY = "sk-***************"
